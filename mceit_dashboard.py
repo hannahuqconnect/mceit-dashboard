@@ -109,7 +109,7 @@ with st.sidebar:
     st.subheader("Load a literature example")
 
     for name, lit_rr, lit_cost in LITERATURE:
-        if st.button(f"{name}\n({lit_rr:.2f}× · {fmt_aud(lit_cost)})",
+        if st.button(name,
                      use_container_width=True):
             # Streamlit re-runs on click; we use query params to pass values
             st.session_state["rr"]   = lit_rr
@@ -244,30 +244,28 @@ fig.add_trace(go.Scatter(
     hovertemplate="$50k/LYS: $%{y:.2f}M<extra></extra>",
 ))
 
-# Literature interventions (grey diamonds)
+# Literature interventions — only shown when one is loaded
+_loaded_name = None
 for name, lit_rr, lit_cost in LITERATURE:
-    fig.add_trace(go.Scatter(
-        x=[lit_rr], y=[lit_cost / 1e6],
-        mode="markers+text",
-        name=name,
-        marker=dict(symbol="diamond", size=9, color="#888888",
-                    line=dict(color="white", width=1.5)),
-        text=[name.split(" (")[0]],
-        textposition="top right",
-        textfont=dict(size=10, color="#888888"),
-        showlegend=True,
-    ))
+    if abs(lit_rr - rr) < 0.001 and abs(lit_cost / 1e6 - cost_m) < 0.01:
+        _loaded_name = name
+        break
 
 # User's intervention point
+_dot_label = _loaded_name if _loaded_name else "Your intervention"
 fig.add_trace(go.Scatter(
     x=[rr], y=[cost / 1e6],
-    mode="markers",
-    name="Your intervention",
+    mode="markers+text",
+    name=_dot_label,
     marker=dict(
         symbol="circle", size=14,
         color="#FF6B35",
         line=dict(color="white", width=2),
     ),
+    text=[_dot_label],
+    textposition="top right",
+    textfont=dict(size=10, color="#FF6B35"),
+    showlegend=False,
     hovertemplate=(
         f"<b>Your intervention</b><br>"
         f"RR: {rr:.2f}×<br>"
