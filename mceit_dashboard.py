@@ -287,6 +287,7 @@ fig.update_layout(
         range=[0.97, 1.63],
         gridcolor="rgba(100,100,100,0.15)",
         zeroline=False,
+        hoverformat=".2f",
     ),
     yaxis=dict(
         title="Threshold (AUD, millions)",
