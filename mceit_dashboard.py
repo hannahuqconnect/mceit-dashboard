@@ -14,7 +14,7 @@ import numpy as np
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="MCEIT Dashboard",
-    page_icon="📈",
+    # page_icon="📈",
     layout="wide",
 )
 
@@ -33,9 +33,9 @@ COMPARATOR_KITS   = 1_349_188.347606  # kits returned in the comparator scenario
 
 LITERATURE = [
     # ("GP endorsement",                    1.01,  6_686_872),
-    ("Patient reminder(multiple methods)", 1.07,  1_003_334),
+    ("Patient reminder (multiple methods)", 1.07,  1_003_334),
     ("Patient navigation",                1.16, 380_023_523),
-    ("Patient reminder(phone call)",     1.30, 24_480_274),
+    ("Patient reminder (phone call)",     1.30, 24_480_274),
 ]
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
