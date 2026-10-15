@@ -92,7 +92,7 @@ with st.sidebar:
     )
 
     cost_m = st.number_input(
-        "Program cost (AUD, millions)",
+        "Intervention cost (AUD, millions)",
         min_value=0.0, value=50.0, step=1.0, format="%.2f",
     )
     cost = cost_m * 1e6
